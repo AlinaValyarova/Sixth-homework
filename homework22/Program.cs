@@ -92,19 +92,17 @@ namespace homework22
                     string[] guests = new string[3];
                     guests = text.Split(" ");
                     person.FirstName = guests[0];
-
                     person.SecondName = guests[1];
-
                     person.Num = int.Parse(guests[2]);
+                    spisok.Add(person);
 
 
                 }
 
-
             }
         }
 
-            public static void AddTofile(string fileName, string text)
+        public static void AddTofile(string fileName, string text)
         {
             File.AppendAllText(fileName, text);
         }
@@ -189,82 +187,97 @@ namespace homework22
             Readtechers(teachers, path2);
             ReadList(firstgroup, secondgroup, thirdgroup, fourthgroup, path);
 
-                Console.WriteLine("Welcome to our Children garden. Pleese, choose needed operation ");
-                Console.WriteLine(Print());
-                try
+            Console.WriteLine("Welcome to our Children garden. Pleese, choose needed operation ");
+            Console.WriteLine(Print());
+            try
+            {
+
+                int num = Convert.ToInt32(Console.ReadLine());
+                switch (num)
                 {
+                    case 1:
+                        Console.WriteLine("Enter number of needed group");
+                        int group = Convert.ToInt32(Console.ReadLine());
+                        switch (group)
+                        {
+                            case 1:
+                                PrintList(firstgroup);
+                                return;
 
-                    int num = Convert.ToInt32(Console.ReadLine());
-                    switch (num)
-                    {
-                        case 1:
-                            Console.WriteLine("Enter number of needed group");
-                            int group = Convert.ToInt32(Console.ReadLine());
-                            switch (group)
-                            {
-                                case 1:
-                                    PrintList(firstgroup);
-                                    return;
+                            case 2:
+                                PrintList(secondgroup);
+                                return;
 
-                                case 2:
-                                    PrintList(secondgroup);
-                                    return;
+                            case 3:
+                                PrintList(thirdgroup);
+                                return;
 
-                                case 3:
-                                    PrintList(thirdgroup);
-                                    return;
+                            case 4:
+                                PrintList(fourthgroup);
+                                return;
+                            default:
+                                Console.WriteLine("This group wasn't found");
+                                return;
 
-                                case 4:
-                                    PrintList(fourthgroup);
-                                    return;
-                                default:
-                                    Console.WriteLine("This group wasn't found");
-                                    return;
-
-                            }
-                        case 2:
+                        }
+                    case 2:
                         {
                             Console.WriteLine("Enter the first name of a kid");
-                                string a = Console.ReadLine();
-                                Console.WriteLine("Enter the second name of a kid");
-                                string b = Console.ReadLine();
-                                Console.WriteLine("Enter the age of a kid");
-                                string c = Console.ReadLine();
-                                string abc = a + " " + b + " " + c + " ";
-                                AddTofile(path, abc);
-                                Console.WriteLine("Kid was added successfully");
-                                return;
-                            }
+                            string a = Console.ReadLine();
+                            Console.WriteLine("Enter the second name of a kid");
+                            string b = Console.ReadLine();
+                            Console.WriteLine("Enter the age of a kid");
+                            string c = Console.ReadLine();
+                            string abc = a + " " + b + " " + c + " ";
+                            AddTofile(path, abc);
+                            Console.WriteLine("Kid was added successfully");
+                            return;
+                        }
 
-                        case 3:
-                            {
-                                Console.WriteLine("Enter the name of kid who you want to delete");
-                                string a = Console.ReadLine();
-                                Console.WriteLine("Enter the surname of kid who you want to delete");
-                                string b = Console.ReadLine();
-                                Console.WriteLine("Enter the age of kid who you want to delete");
-                                string c = Console.ReadLine();
-                                string abc = a + " " + b + " " + c + " ";
-                                DeleteFromFile(abc, path);
-                                Console.WriteLine("Kid was deleted successfully");
-                                return;
-                            }
+                    case 3:
+                        {
+                            Console.WriteLine("Enter the name of kid who you want to delete");
+                            string a = Console.ReadLine();
+                            Console.WriteLine("Enter the surname of kid who you want to delete");
+                            string b = Console.ReadLine();
+                            Console.WriteLine("Enter the age of kid who you want to delete");
+                            string c = Console.ReadLine();
+                            string abc = a + " " + b + " " + c + " ";
+                            DeleteFromFile(abc, path);
+                            Console.WriteLine("Kid was deleted successfully");
+                            return;
+                        }
 
-                        case 4:
-                            {
-                                PrintList2(teachers);
-                                return;
-                            }
+                    case 4:
+                        {
+                            PrintList2(teachers);
+                            return;
+                        }
 
-                    }
-                }
+                    case 5:
+                        {
+                            Console.WriteLine("Enter surname of person you want to fire");
+                            string a = Console.ReadLine();
+                            Console.WriteLine("Enter the name of person you want to fire");
+                            string b = Console.ReadLine();
+                            Console.WriteLine("Enter the number of group of person you want to fire");
+                            string c = Console.ReadLine();
+                            string abc = a + " " + b + " " + c + " ";
+                            DeleteFromFile(abc, path2);
+                            Console.WriteLine(a + " " + b +" was deleted successfully");
+                            return;
+                        }
 
-                catch
-                {
-                    Console.WriteLine("Error!");
+
                 }
             }
+
+            catch
+            {
+                Console.WriteLine("Error!");
             }
+        }
+    }
 
     }
 
