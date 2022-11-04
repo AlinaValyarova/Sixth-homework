@@ -12,7 +12,7 @@ namespace tumakov
     {
         static void Main(string[] args)
         {
-            ex1();
+            ex3();
         }
 
 
@@ -20,15 +20,44 @@ namespace tumakov
         {
             public int num;
             public decimal money;
+        }
+        public static void AddMoney(List<account> bank)
+        {
+            Console.WriteLine("Enter number of your account");
+            int acnum = Convert.ToInt32(Console.ReadLine());
+            var found = bank.Find(p => p.num == acnum);
 
-            public static void AddMoney(List<account> bank)
-            {
-                Console.WriteLine("Enter number of your account");
-                int acnum = Convert.ToInt32(Console.ReadLine());
-
-            }
+            Console.WriteLine("Emter amount of money you want to add");
+            decimal num = Convert.ToDecimal(Console.ReadLine());
+            int a = bank.IndexOf(found);
+            bank[a].money = num;
+            Console.WriteLine("money were added successfully");
 
         }
+
+        public static void TakeMoney(List<account> bank)
+        {
+            Console.WriteLine("Enter number of your account");
+            int acnum = Convert.ToInt32(Console.ReadLine());
+            var found = bank.Find(p => p.num == acnum);
+
+            Console.WriteLine("Emter amount of money you want to take");
+            decimal num = Convert.ToDecimal(Console.ReadLine());
+            int a = bank.IndexOf(found);
+            if (bank[a].money >= num)
+            {
+                bank[a].money -= num;
+                Console.WriteLine("success!");
+            }
+            else
+            {
+                Console.WriteLine("You don't have enough money");
+            }
+            
+            
+
+        }
+
 
 
         public static void ex1()
@@ -108,6 +137,35 @@ namespace tumakov
             Console.WriteLine("Добавить в класс счет в банке два метода: снять со счета и положить на счет." +
                 "Метод снять со счета проверяет, возможно ли снять запрашиваемую сумму, " +
                 "и в случае положительного результата изменяет баланс.");
+            List<account> clients = new List<account>();
+            try
+            {
+                Console.WriteLine("Choose needed operation");
+                Console.WriteLine(" 1 - Add money");
+                Console.WriteLine("2 - Take money");
+                int a = Convert.ToInt32(Console.ReadLine());
+                switch (a)
+                {
+                    case 1:
+                        AddMoney(clients);
+                        return;
+
+                    case 2:
+                        TakeMoney(clients);
+                        return;
+
+                    default:
+                        Console.WriteLine("You entered something wrong");
+                        return;
+
+                }
+                
+            }
+            catch
+            {
+
+                Console.WriteLine("Error!");
+            }
         }
         }
     }

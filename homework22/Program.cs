@@ -11,7 +11,6 @@ namespace homework22
     class ChildrenGarden
     {
 
-        //методы
         public static string Print()
         {
             Console.WriteLine("1 - print list of kids in a group");
@@ -111,9 +110,7 @@ namespace homework22
         {
             var tempFile = Path.GetTempFileName();
             var linesToKeep = File.ReadLines(txt).Where(l => l != s);
-
             File.WriteAllLines(tempFile, linesToKeep);
-
             File.Delete(txt);
             File.Move(tempFile, txt);
         }
@@ -173,8 +170,6 @@ namespace homework22
 
         }
 
-        ////////////////////////////////////////////////////////////////////////////////
-
         static void Main()
         {
             List<kid> firstgroup = new List<kid>();
@@ -186,7 +181,6 @@ namespace homework22
             string path2 = @"C:\Users\Allli\Desktop\stuff.txt";
             Readtechers(teachers, path2);
             ReadList(firstgroup, secondgroup, thirdgroup, fourthgroup, path);
-
             Console.WriteLine("Welcome to our Children garden. Pleese, choose needed operation ");
             Console.WriteLine(Print());
             try
@@ -264,7 +258,7 @@ namespace homework22
                             string c = Console.ReadLine();
                             string abc = a + " " + b + " " + c + " ";
                             DeleteFromFile(abc, path2);
-                            Console.WriteLine(a + " " + b +" was deleted successfully");
+                            Console.WriteLine(a + " " + b +" fired was  successfully");
                             return;
                         }
 
@@ -272,9 +266,9 @@ namespace homework22
                 }
             }
 
-            catch
+            catch (FormatException e)
             {
-                Console.WriteLine("Error!");
+                Console.WriteLine(e.Message);
             }
         }
     }
